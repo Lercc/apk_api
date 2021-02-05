@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientRequest;
+use App\Http\Resources\ClientCollection;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::latest('id')->paginate(10);
+
+        return new ClientCollection($clients);
     }
 
     /**
@@ -23,9 +29,11 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        //
+        $client = Client::create($request->validated());
+
+        return response()->json($client, 201);
     }
 
     /**
@@ -36,7 +44,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return new ClientResource($client);
     }
 
     /**
@@ -48,7 +56,39 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        //basic rules
+        $basic_rules = [
+            'name'        => ['required', 'string', 'max:80'],
+            'surnames'    => ['required', 'string', 'max:120'],
+            'mobile'      => ['nullable', 'numeric', 'digits:9'],
+            'profile'     => ['string', 'nullable'],
+            'commentary'  => ['string', 'nullable'],
+        ];
+
+        if ($request->dni == $client->dni) {
+            $rules = ['dni' => ['required', 'numeric','digits:8']];
+            
+            if ($request->email == $client->email) {
+                $rules = $rules + ['email' => ['required', 'string', 'email']];
+            } else {
+                $rules = $rules + ['email' => ['required', 'string', 'email','unique:clients,email'],];
+            }
+        } else if ($request->dni != $client->dni) {
+            $rules = ['dni' => ['required', 'numeric','digits:8', 'unique:clients,dni']];
+
+            if ($request->email == $client->email) {
+                $rules = $rules + ['email' => ['required', 'string', 'email']];
+            } else {
+                $rules = $rules + ['email' => ['required', 'string', 'email','unique:clients,email'],];
+            }
+        }
+        //VALIDACIÓN
+        $rules = $rules + $basic_rules;
+        $this->validate($request, $rules);
+        //ACTUALIZACIÓN
+        $client->update($request->all());
+        //RESPUESTA API
+        return new ClientResource($client);
     }
 
     /**
@@ -59,6 +99,10 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        return response()->json(null,204);
+        
     }
+
 }
