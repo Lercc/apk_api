@@ -21,4 +21,9 @@ class Program extends Model
     {
         return $this->hasMany(ClientProgram::class);
     }
+
+    public function leads()
+    {
+        return $this->hasMany(Lead::class);
+    }
 }

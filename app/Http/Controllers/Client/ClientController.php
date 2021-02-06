@@ -33,7 +33,8 @@ class ClientController extends Controller
     {
         $client = Client::create($request->validated());
 
-        return response()->json($client, 201);
+        // return response()->json($client, 201);
+        return new ClientResource($client);
     }
 
     /**

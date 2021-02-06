@@ -9,6 +9,9 @@ class Lead extends Model
 {
     use HasFactory;
 
+    const PIPELINE_DISPATCH = 'no';
+    const DEFAULT_TABLE_NAME = 'calificados';
+
     protected $fillable = [
         'dni',
         'name',
