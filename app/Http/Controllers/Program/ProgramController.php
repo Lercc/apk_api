@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Program;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProgramRequest;
+use App\Http\Resources\ProgramCollection;
+use App\Http\Resources\ProgramResource;
 use App\Models\Program;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,8 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+        $programs = Program::paginate();
+        return new ProgramCollection($programs);
     }
 
     /**
@@ -23,9 +28,10 @@ class ProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProgramRequest $request)
     {
-        //
+        $program = Program::create($request->validated());
+        return new ProgramResource($program);
     }
 
     /**
@@ -36,7 +42,7 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        //
+        return new ProgramResource($program);
     }
 
     /**
@@ -46,9 +52,10 @@ class ProgramController extends Controller
      * @param  \App\Models\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(ProgramRequest $request, Program $program)
     {
-        //
+        $program->update($request->validated());
+        return new ProgramResource($program);
     }
 
     /**
@@ -59,6 +66,7 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        $program->delete();
+        return response()->json(null,204);
     }
 }

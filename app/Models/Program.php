@@ -9,5 +9,11 @@ class Program extends Model
 {
     use HasFactory;
 
-    const DEFAULT_STATE = 'activado'; // activado - desactivado 
+    const DEFAULT_STATE = 'activado'; // activado - desactivado
+    
+    protected $fillable = [
+        'name',
+        'state',
+        'description'
+    ];
 }

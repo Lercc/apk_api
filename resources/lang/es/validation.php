@@ -178,6 +178,7 @@ return [
         'role'                  => 'rol',
         'second'                => 'segundo',
         'sex'                   => 'sexo',
+        'state'                 => 'estado',
         'subject'               => 'asunto',
         'surnames'              => 'apellidos',
         'terms'                 => 'términos',
