@@ -18,7 +18,7 @@ class ClientProgramController extends Controller
      */
     public function index()
     {
-        $clientPrograms = ClientProgram::latest('id')->paginate();
+        $clientPrograms = ClientProgram::latest('id')->paginate(10);
         return new ClientProgramCollection($clientPrograms);
     }
 

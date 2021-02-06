@@ -18,7 +18,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::paginate();
+        $programs = Program::paginate(10);
         return new ProgramCollection($programs);
     }
 

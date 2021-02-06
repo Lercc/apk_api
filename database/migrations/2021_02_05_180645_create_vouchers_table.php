@@ -18,9 +18,10 @@ class CreateVouchersTable extends Migration
             $table->id();
             $table->bigInteger('client_program_id')->unsigned();
             $table->string('name',80);
-            $table->string('image');
+            $table->string('code')->unique();
+            $table->string('image')->nullable();
             $table->string('state',10)->default(Voucher::DEFAULT_STATE); //pendiente verificado
-            $table->string('description')->nullable();
+            $table->string('description',200)->nullable();
             $table->timestamps();
 
             $table->foreign('client_program_id')->references('id')->on('client_programs');

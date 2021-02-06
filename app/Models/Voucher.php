@@ -11,6 +11,17 @@ class Voucher extends Model
 
     const DEFAULT_STATE = 'pendiente'; // pendiente verificado
 
+    // protected $table = "vouchers";
+
+    protected $fillable = [
+        'client_program_id',
+        'name',
+        'code',
+        'image',
+        'state',
+        'description',
+    ];
+
     public function clientProgram()
     {
         return $this->belongsTo(ClientProgram::class);
