@@ -12,11 +12,28 @@ use App\Http\Controllers\Voucher\VoucherController;
 //     return $request->user();
 // });
 
+
+/**
+ *  Clients
+ */
 Route::apiResource('clients', ClientController::class);
 
+
+/**
+ *  Programs
+ */
 Route::apiResource('programs', ProgramController::class);
 
+
+/**
+ *  ClientPrograms
+ */
 Route::apiResource('clientPrograms', ClientProgramController::class);
 Route::apiResource('clientPrograms.vouchers', ClientProgramVoucheController::class)->only('index');
 
+
+/**
+ *  Vouchers
+ */
 Route::apiResource('vouchers', VoucherController::class);
+
