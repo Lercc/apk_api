@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Career;
 
+use App\Http\Controllers\Controller;
 use App\Models\Career;
 use Illuminate\Http\Request;
 
