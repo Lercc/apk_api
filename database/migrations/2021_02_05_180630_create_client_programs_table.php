@@ -20,7 +20,7 @@ class CreateClientProgramsTable extends Migration
             $table->bigInteger('program_id')->unsigned();
             $table->string('season');
             $table->string('state',9)->default(ClientProgram::DEFAULT_STATE); //activo terminado
-            $table->string('description',200);
+            $table->string('description',200)->nullable();
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients');

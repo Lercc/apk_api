@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\ClientProgram;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientProgramRequest;
+use App\Http\Resources\ClientProgramCollection;
+use App\Http\Resources\ClientProgramResource;
 use App\Models\ClientProgram;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,8 @@ class ClientProgramController extends Controller
      */
     public function index()
     {
-        //
+        $clientPrograms = ClientProgram::latest('id')->paginate();
+        return new ClientProgramCollection($clientPrograms);
     }
 
     /**
@@ -23,9 +28,10 @@ class ClientProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientProgramRequest $request)
     {
-        //
+        $clientProgram = ClientProgram::create($request->validated());
+        return new ClientProgramResource($clientProgram);
     }
 
     /**
@@ -36,7 +42,7 @@ class ClientProgramController extends Controller
      */
     public function show(ClientProgram $clientProgram)
     {
-        //
+        return new ClientProgramResource($clientProgram);
     }
 
     /**
@@ -46,9 +52,12 @@ class ClientProgramController extends Controller
      * @param  \App\Models\ClientProgram  $clientProgram
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientProgram $clientProgram)
+    public function update(ClientProgramRequest $request, ClientProgram $clientProgram)
     {
-        //
+    
+        $clientProgram->update($request->validated());
+
+        return new ClientProgramResource($clientProgram);
     }
 
     /**
@@ -59,6 +68,7 @@ class ClientProgramController extends Controller
      */
     public function destroy(ClientProgram $clientProgram)
     {
-        //
+        $clientProgram->delete();
+        return response()->json(null,204);
     }
 }

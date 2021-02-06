@@ -18,4 +18,9 @@ class Client extends Model
         'profile',
         'commentary'
     ];
+
+    public function clientPrograms()
+    {
+        return $this->hasMany(ClientProgram::class);
+    }
 }

@@ -16,4 +16,9 @@ class Program extends Model
         'state',
         'description'
     ];
+
+      public function clientPrograms()
+    {
+        return $this->hasMany(ClientProgram::class);
+    }
 }

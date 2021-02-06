@@ -10,4 +10,9 @@ class Voucher extends Model
     use HasFactory;
 
     const DEFAULT_STATE = 'pendiente'; // pendiente verificado
+
+    public function clientProgram()
+    {
+        return $this->belongsTo(ClientProgram::class);
+    }
 }
