@@ -7,17 +7,22 @@ use App\Http\Controllers\Program\ProgramController;
 use App\Http\Controllers\ClientProgram\ClientProgramController;
 use App\Http\Controllers\ClientProgram\ClientProgramVoucheController;
 use App\Http\Controllers\Lead\LeadController;
+use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Voucher\VoucherController;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
+/**
+ * login
+ */
+Route::post('login', [LoginController::class, 'login']);
 
 /**
  *  Clients
  */
-Route::apiResource('clients', ClientController::class);
+Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum');
 
 
 /**
