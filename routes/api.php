@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\ClientClientProgramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\ClientController;
@@ -23,7 +24,7 @@ Route::post('login', [LoginController::class, 'login']);
  *  Clients
  */
 Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum');
-
+Route::apiResource('clients.clientPrograms', ClientClientProgramController::class)->only('index')->middleware('auth:sanctum');
 
 /**
  *  Programs

@@ -19,6 +19,7 @@ class VoucherResource extends JsonResource
             'type'          => 'voucher',
             'id'            => (string) $this->id,
             'attributes'    => [
+                'id'                    => $this->id,
                 'client_program_id'     => $this->client_program_id,
                 'name'                  => $this->name,
                 'code'                  => $this->code,

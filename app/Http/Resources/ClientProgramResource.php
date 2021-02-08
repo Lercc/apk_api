@@ -19,11 +19,13 @@ class ClientProgramResource extends JsonResource
             'type'          => 'clientProgram',
             'id'            => (string) $this->id,
             'attributes'    => [
-                'client_id'     => $this->client_id,
-                'program_id'    => $this->program_id,
-                'season'        => $this->season,
-                'state'         => $this->state,
-                'description'   => $this->description,
+                'id'              => $this->id,
+                'client_id'       => $this->client_id,
+                'program_id'      => $this->program_id,
+                'program_name'    => $this->program->name,
+                'season'          => $this->season,
+                'state'           => $this->state,
+                'description'     => $this->description,
             ],
             'relationships' => [
                 'client' => [

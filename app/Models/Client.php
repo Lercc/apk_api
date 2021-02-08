@@ -21,6 +21,6 @@ class Client extends Model
 
     public function clientPrograms()
     {
-        return $this->hasMany(ClientProgram::class);
+        return $this->hasMany(ClientProgram::class)->orderBy('id','desc');
     }
 }
