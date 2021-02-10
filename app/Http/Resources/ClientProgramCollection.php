@@ -16,18 +16,4 @@ class ClientProgramCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
-
-    public function with($request)
-    {
-        return [
-            'included' => [
-                $this->collection->pluck('client')->unique()->values()->map(function ($client) {
-                    return new ClientResource($client);
-                }),
-                $this->collection->pluck('program')->unique()->values()->map(function ($program) {
-                    return new ProgramResource($program);
-                }),
-            ]
-        ];
-    }
 }

@@ -35,9 +35,8 @@ class VoucherController extends Controller
         $voucher = Voucher::create($request->validated());
         
         $image = $request->file('image')->store('image/voucher','public');
-        $voucher->image = asset("storage/$image");
+        $voucher->image = $image;
         $voucher->save();
-
         return new VoucherResource($voucher); 
     }
 
@@ -64,8 +63,6 @@ class VoucherController extends Controller
         $basic_rules = [
             'client_program_id'   => ['required','numeric'],
             'name'                => ['required','string', 'max:80'],
-            // 'code'                => ['required','string', 'unique:vouchers,code'],
-            // 'image'               => ['required', 'mimes:jpeg,jpg,jpe,png'],
             'state'               => ['required','string', 'max:10'],
             'description'         => ['nullable','string', 'max:200']
         ];
@@ -76,28 +73,28 @@ class VoucherController extends Controller
             if($request->file('image') == null ) {
                 $rule = $rule + ['image'=> ['nullable']];
             } else {
-                $rule = $rule +['image' => ['mimes:jpeg,jpg,jpe,png']];
+                $rule = $rule +['image' => ['mimes:jpeg,jpg,jpe,png,webp']];
             }
         } else {
             $rule = ['code' => ['required','string']];
             if($request->file('image') == null ) {
                 $rule = $rule + ['image'=> ['nullable']];
             } else {
-                $rule = $rule +['image' => ['mimes:jpeg,jpg,jpe,png']];
+                $rule = $rule +['image' => ['mimes:jpeg,jpg,jpe,png,webp']];
             }
         }
-
-        
         $rule = $rule + $basic_rules;
-        
         $this->validate($request,$rule);
                
         $voucher->update($request->except('image'));
         
         if ($request->hasFile('image')) {
+            //BORAR IMG ANTIGUA DEL STORAGE
             Storage::disk('public')->delete($voucher->image);
+            //GUARDAR IMG NUEVA EN EL STORAGE
             $img = $request->file('image')->store('image/voucher','public');
-            $voucher->image = asset("storage/$img");
+            //ACTUALZIAR BD
+            $voucher->image = $img;
             $voucher->save();
         }
         return new VoucherResource($voucher); 
@@ -111,6 +108,7 @@ class VoucherController extends Controller
      */
     public function destroy(voucher $voucher)
     {
+        Storage::disk('public')->delete($voucher->image);
         $voucher->delete();
         return response()->json(null,204);
     }

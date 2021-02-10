@@ -27,7 +27,7 @@ class VoucherRequest extends FormRequest
             'client_program_id'   => ['required','numeric'],
             'name'                => ['required','string', 'max:80'],
             'code'                => ['required','string', 'unique:vouchers,code'],
-            'image'               => ['required', 'mimes:jpeg,jpg,jpe,png'],
+            'image'               => ['required', 'mimes:jpeg,jpg,jpe,png,webp'],
             'state'               => ['required','string', 'max:10'],
             'description'         => ['nullable','string', 'max:200']
         ];

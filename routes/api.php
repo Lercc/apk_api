@@ -29,20 +29,20 @@ Route::apiResource('clients.clientPrograms', ClientClientProgramController::clas
 /**
  *  Programs
  */
-Route::apiResource('programs', ProgramController::class);
+Route::apiResource('programs', ProgramController::class)->middleware('auth:sanctum');
 
 
 /**
  *  ClientPrograms
  */
-Route::apiResource('clientPrograms', ClientProgramController::class);
-Route::apiResource('clientPrograms.vouchers', ClientProgramVoucheController::class)->only('index');
+Route::apiResource('clientPrograms', ClientProgramController::class)->middleware('auth:sanctum');
+Route::apiResource('clientPrograms.vouchers', ClientProgramVoucheController::class)->only('index')->middleware('auth:sanctum');
 
 
 /**
  *  Vouchers
  */
-Route::apiResource('vouchers', VoucherController::class);
+Route::apiResource('vouchers', VoucherController::class)->middleware('auth:sanctum');
 
 
 /**

@@ -23,7 +23,7 @@ class VoucherResource extends JsonResource
                 'client_program_id'     => $this->client_program_id,
                 'name'                  => $this->name,
                 'code'                  => $this->code,
-                'image'                 => $this->image,
+                'image'                 => asset("storage/$this->image"),
                 'state'                 => $this->state,
                 'description'           => $this->description,
             ],
