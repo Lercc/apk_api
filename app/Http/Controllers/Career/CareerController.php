@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Career;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CareerCollection;
+use App\Http\Resources\CareerResourse;
 use App\Models\Career;
 use Illuminate\Http\Request;
 
 class CareerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+    public function getAll()
+    {
+        $careers = Career::get();
+        return new CareerCollection($careers);
+    }
+    
     public function index()
     {
-        //
+        $careers = Career::paginate(10);
+        return new CareerCollection($careers);
     }
 
     /**
@@ -37,7 +42,7 @@ class CareerController extends Controller
      */
     public function show(Career $career)
     {
-        //
+        return new CareerResourse($career);
     }
 
     /**

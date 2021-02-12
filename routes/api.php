@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Career\CareerController;
 use App\Http\Controllers\Client\ClientClientProgramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Program\ProgramController;
 use App\Http\Controllers\ClientProgram\ClientProgramController;
 use App\Http\Controllers\ClientProgram\ClientProgramVoucheController;
+use App\Http\Controllers\Institution\InstitutionController;
 use App\Http\Controllers\Lead\LeadController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Voucher\VoucherController;
@@ -25,6 +27,19 @@ Route::post('login', [LoginController::class, 'login']);
  */
 Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum');
 Route::apiResource('clients.clientPrograms', ClientClientProgramController::class)->only('index')->middleware('auth:sanctum');
+
+/**
+ *  Careers
+ */
+Route::get('all/careers', [CareerController::class, 'getAll'])->middleware('auth:sanctum');
+Route::apiResource('careers', CareerController::class)->middleware('auth:sanctum');
+
+
+/**
+ *  Institutions
+ */
+Route::get('all/institutions', [InstitutionController::class, 'getAll'])->middleware('auth:sanctum');
+Route::apiResource('institutions', InstitutionController::class)->middleware('auth:sanctum');
 
 /**
  *  Programs

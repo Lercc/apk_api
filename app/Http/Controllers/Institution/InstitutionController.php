@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Institution;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\InstitutionCollection;
+use App\Http\Resources\InstitutionResource;
 use App\Models\Institution;
 use Illuminate\Http\Request;
 
 class InstitutionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
+    public function getAll()
+    {
+        $institutions = Institution::get();
+        return new InstitutionCollection($institutions);
+    }
+
     public function index()
     {
-        //
+        $institutions = Institution::paginate(10);
+        return new InstitutionCollection($institutions);
     }
 
     /**
@@ -37,7 +42,7 @@ class InstitutionController extends Controller
      */
     public function show(Institution $institution)
     {
-        //
+        return new InstitutionResource($institution);
     }
 
     /**
