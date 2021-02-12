@@ -19,6 +19,7 @@ class LeadResource extends JsonResource
             'type'          => 'lead',
             'id'            => (string) $this->id,
             'attributes'    => [
+                'id'                        => $this->id,
                 'dni'                       => $this->dni,
                 'name'                      => $this->name,
                 'surnames'                  => $this->surnames,

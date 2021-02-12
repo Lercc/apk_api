@@ -24,10 +24,10 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-          'dni'         => ['required', 'numeric','digits:8', 'unique:clients,dni'],
+          'dni'         => ['required', 'string','digits:8', 'unique:clients,dni'],
           'name'        => ['required', 'string', 'max:80'],
           'surnames'    => ['required', 'string', 'max:120'],
-          'mobile'      => ['nullable', 'numeric', 'digits:9'],
+          'mobile'      => ['nullable', 'string', 'digits:9'],
           'email'       => ['required', 'string', 'email','unique:clients,email'],
           'profile'     => ['string', 'nullable'],
           'commentary'  => ['string', 'nullable'],

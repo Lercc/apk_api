@@ -50,22 +50,23 @@ Route::apiResource('vouchers', VoucherController::class)->middleware('auth:sanct
  */
 
 // CREATE LEADS
-Route::post('leads/store', [LeadController::class, 'store'])->name('leads.store');
+Route::post('leads/store', [LeadController::class, 'store']);
+Route::get('leads/show/{lead}', [LeadController::class, 'show'])->middleware('auth:sanctum');
 
 
 // INDEX LEADS
-Route::get('leads/calificados', [LeadController::class, 'indexCalificados'])->name('leads.calificados');//->middleware('auth');
+Route::get('leads/calificados', [LeadController::class, 'indexCalificados'])->middleware('auth:sanctum');
 
-Route::get('leads/perfiles-aceptados', [LeadController::class, 'indexAceptados'])->name('leads.aceptados'); //->middleware('auth');
-Route::get('leads/perfiles-aceptados-enviado', [LeadController::class, 'indexAceptadosEnviado'])->name('leads.aceptados.enviado'); //->middleware('auth');
-Route::get('leads/perfiles-aceptados-noenviado', [LeadController::class, 'indexAceptadosNoEnviado'])->name('leads.aceptados.noenviado'); //->middleware('auth');
+Route::get('leads/perfiles-aceptados', [LeadController::class, 'indexAceptados'])->middleware('auth:sanctum');
+Route::get('leads/perfiles-aceptados-enviado', [LeadController::class, 'indexAceptadosEnviado'])->middleware('auth:sanctum');
+Route::get('leads/perfiles-aceptados-noenviado', [LeadController::class, 'indexAceptadosNoEnviado'])->middleware('auth:sanctum');
 
-Route::get('leads/edad', [LeadController::class, 'indexEdad'])->name('leads.edad'); //->middleware('auth');
-Route::get('leads/ingles', [LeadController::class, 'indexIngles'])->name('leads.ingles'); //->middleware('auth');
+Route::get('leads/edad', [LeadController::class, 'indexEdad'])->middleware('auth:sanctum');
+Route::get('leads/ingles', [LeadController::class, 'indexIngles'])->middleware('auth:sanctum');
 
 
 //  UPDATE GENERAL LEADS
-Route::put('leads/{lead}/update', [LeadController::class, 'update'])->name('leads.update'); //->middleware('auth');
+Route::put('leads/{lead}/update', [LeadController::class, 'update'])->name('leads.update')->middleware('auth:sanctum'); //->middleware('auth');
 
 
 // UPDATE PARTICULARES LEADS

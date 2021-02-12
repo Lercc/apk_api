@@ -25,7 +25,7 @@ class VoucherFactory extends Factory
             'client_program_id' => rand(1,100),
             'name'              => $this->faker->sentence(3),
             'code'              => $this->faker->unique()->numberBetween(1000000, 9999999),
-            'image'             => 'https://picsum.photos/480/516',
+            'image'             => 'image/voucher/default-voucher.png',
             // 'state'
             'description'       => $this->faker->text(200),
         ];

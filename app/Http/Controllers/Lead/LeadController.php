@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 
 class LeadController extends Controller
 {
-    
+    public function show (Lead $lead) {
+        return new LeadResource($lead);
+    }
+
     /**
      * Store no protegido por el middleware auth
      */
@@ -24,7 +27,7 @@ class LeadController extends Controller
 
         //refactoring
         $lead = Lead::create($request->validated());
-
+     
         return new LeadResource($lead);
     }
 
@@ -64,7 +67,6 @@ class LeadController extends Controller
         // $pipeline = 'si';
         // return view('private.leads.aceptados', compact('leads','pipeline'));
         return new LeadCollection($leads);
-
     }
 
     public function indexAceptadosNoEnviado()
