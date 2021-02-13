@@ -206,9 +206,9 @@ class LeadController extends Controller
         $lead->save();
 
         if($pPipe == 'si') {
-            return response()->json(['message' =>'El estado del registro fue cambiado a ENVIADO']);
+            return response()->json(['message' =>'Cambiado a ENVIADO']);
         } else {
-            return response()->json(['message' =>'El estado del registro fue cambiado a NO ENVIADO']);
+            return response()->json(['message' =>'Cambiado a NO ENVIADO']);
         }
     }
 
