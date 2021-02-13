@@ -32,7 +32,7 @@ class LeadFactory extends Factory
             'institution_id'            => $this->faker->numberBetween(1,94),
             'english_level'              => 'intermedio',
             'program_id'                => $this->faker->numberBetween(1,4),
-            'communication_channel'     => 'facebook',
+            'communication_channel'     => 'Facebook/Messenger',
             'schedule_start'            => $this->faker->numberBetween(1,11),
             'schedule_start_meridiem'   => 'am',
             'schedule_end'              => $this->faker->numberBetween(1,11),

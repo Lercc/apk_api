@@ -25,8 +25,8 @@ class ClientRequest extends FormRequest
     {
         return [
           'dni'         => ['required', 'string','digits:8', 'unique:clients,dni'],
-          'name'        => ['required', 'string', 'max:80'],
-          'surnames'    => ['required', 'string', 'max:120'],
+          'name'        => ['required', 'string', 'max:80', 'regex:/^[\pL\s\-]+$/u'],
+          'surnames'    => ['required', 'string', 'max:120', 'regex:/^[\pL\s\-]+$/u'],
           'mobile'      => ['nullable', 'string', 'digits:9'],
           'email'       => ['required', 'string', 'email','unique:clients,email'],
           'profile'     => ['string', 'nullable'],

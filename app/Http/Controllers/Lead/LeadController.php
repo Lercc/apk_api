@@ -110,8 +110,8 @@ class LeadController extends Controller
     public function update(Request $request, Lead $lead)
     {
          $more_rules = [
-                'name'                      => ['required', 'string', 'max:40'],
-                'surnames'                  => ['required', 'string', 'max:60'],
+                'name'                      => ['required', 'string', 'max:40', 'regex:/^[\pL\s\-]+$/u'],
+                'surnames'                  => ['required', 'string', 'max:60', 'regex:/^[\pL\s\-]+$/u'],
                 'mobile'                    => ['required', 'digits:9', 'numeric'],
                 'career_id'                 => ['required'],
                 'semester'                  => ['required', 'string', 'max:9'],

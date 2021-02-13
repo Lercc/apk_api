@@ -59,8 +59,8 @@ class ClientController extends Controller
     {
         //basic rules
         $basic_rules = [
-            'name'        => ['required', 'string', 'max:80'],
-            'surnames'    => ['required', 'string', 'max:120'],
+            'name'        => ['required', 'string', 'max:80', 'regex:/^[\pL\s\-]+$/u'],
+            'surnames'    => ['required', 'string', 'max:120', 'regex:/^[\pL\s\-]+$/u'],
             'mobile'      => ['nullable', 'numeric', 'digits:9'],
             'profile'     => ['string', 'nullable'],
             'commentary'  => ['string', 'nullable'],

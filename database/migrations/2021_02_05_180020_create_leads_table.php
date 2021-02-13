@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Lead;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -35,8 +36,8 @@ class CreateLeadsTable extends Migration
             $table->string('commentary',120)->nullable();
             $table->string('profile',200)->nullable();
 
-            $table->string('pipeline_dispatch',2);
-            $table->string('table_name',40);
+            $table->string('pipeline_dispatch',2)->default(Lead::PIPELINE_DISPATCH);
+            $table->string('table_name',40)->default(Lead::DEFAULT_TABLE_NAME);
             $table->timestamps();
 
             $table->foreign('career_id')->references('id')->on('careers');

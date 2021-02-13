@@ -65,7 +65,10 @@ Route::apiResource('vouchers', VoucherController::class)->middleware('auth:sanct
  */
 
 // CREATE LEADS
-Route::post('leads/store', [LeadController::class, 'store']);
+Route::post('leads/store', [LeadController::class, 'store'])->middleware('auth:sanctum');
+
+
+// SHOW ONE LEAD
 Route::get('leads/show/{lead}', [LeadController::class, 'show'])->middleware('auth:sanctum');
 
 
