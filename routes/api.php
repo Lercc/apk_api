@@ -32,6 +32,8 @@ Route::apiResource('clients.clientPrograms', ClientClientProgramController::clas
  *  Careers
  */
 Route::get('all/careers', [CareerController::class, 'getAll'])->middleware('auth:sanctum');
+Route::get('all/active/careers', [CareerController::class, 'getAllActive'])->middleware('auth:sanctum');
+Route::put('updateState/careers/{career}', [CareerController::class, 'updateState'])->middleware('auth:sanctum');
 Route::apiResource('careers', CareerController::class)->middleware('auth:sanctum');
 
 
@@ -39,6 +41,8 @@ Route::apiResource('careers', CareerController::class)->middleware('auth:sanctum
  *  Institutions
  */
 Route::get('all/institutions', [InstitutionController::class, 'getAll'])->middleware('auth:sanctum');
+Route::get('all/active/institutions', [InstitutionController::class, 'getAllActive'])->middleware('auth:sanctum');
+Route::put('updateState/institutions/{institution}', [InstitutionController::class, 'updateState'])->middleware('auth:sanctum');
 Route::apiResource('institutions', InstitutionController::class)->middleware('auth:sanctum');
 
 /**

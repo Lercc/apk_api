@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Career;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CareerRequest;
 use App\Http\Resources\CareerCollection;
 use App\Http\Resources\CareerResourse;
 use App\Models\Career;
@@ -16,55 +17,50 @@ class CareerController extends Controller
         $careers = Career::get();
         return new CareerCollection($careers);
     }
+   
+    public function getAllActive()
+    {
+        $careers = Career::where('state', '=', 'activado')->get();
+        return new CareerCollection($careers);
+    }
     
     public function index()
     {
-        $careers = Career::paginate(10);
+        $careers = Career::latest('id')->paginate(10);
         return new CareerCollection($careers);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(CareerRequest $request)
     {
-        //
+        $career = Career::create($request->validated());
+        return new CareerResourse($career);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Career  $career
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(Career $career)
     {
         return new CareerResourse($career);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Career  $career
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Career $career)
+ 
+    public function update(CareerRequest $request, Career $career)
     {
-        //
+        $career->update($request->validated());
+        return new CareerResourse($career);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Career  $career
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Career $career)
+    public function updateState(CareerRequest $request, Career $career)
     {
-        //
+        // only state updated
+        $career->state = $request->state;
+        $career->save(); 
+     
+        if($request->state == 'desactivado') {
+            return response()->json(['message' =>'DESACTIVADO']);
+        } else {
+            return response()->json(['message' =>'ACTIVADO']);
+        }
     }
 }

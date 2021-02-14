@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Institution;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InstitutionRequest;
 use App\Http\Resources\InstitutionCollection;
 use App\Http\Resources\InstitutionResource;
 use App\Models\Institution;
@@ -16,53 +17,51 @@ class InstitutionController extends Controller
         $institutions = Institution::get();
         return new InstitutionCollection($institutions);
     }
-
-    public function index()
+   
+    public function getAllActive()
     {
-        $institutions = Institution::paginate(10);
+        $institutions = Institution::where('state', '=', 'activado')->get();
         return new InstitutionCollection($institutions);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function index()
     {
-        //
+        $institutions = Institution::latest('id')->paginate(10);
+        return new InstitutionCollection($institutions);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
+
+    public function store(InstitutionRequest $request)
+    {
+        $institution = Institution::create($request->validated());
+        return new InstitutionResource($institution);
+    }
+
+
     public function show(Institution $institution)
     {
         return new InstitutionResource($institution);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Institution $institution)
+ 
+    public function update(InstitutionRequest $request, Institution $institution)
     {
-        //
+        $institution->update($request->validated());
+        return new InstitutionResource($institution);
+    }
+ 
+    public function updateState(InstitutionRequest $request, Institution $institution)
+    {
+        $institution->state = $request->state;
+        $institution->save();
+
+        if($request->state == 'desactivado') {
+            return response()->json(['message' =>'DESACTIVADO']);
+        } else {
+            return response()->json(['message' =>'ACTIVADO']);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Institution $institution)
     {
         //
