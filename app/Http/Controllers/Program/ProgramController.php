@@ -11,59 +11,50 @@ use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function index()
     {
-        $programs = Program::paginate(10);
+        $programs = Program::latest('id')->paginate(10);
         return new ProgramCollection($programs);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getAllActive(){
+        $programs = Program::where('state', '=', 'activado')->get();
+        return new ProgramCollection($programs);
+    }
+
+
     public function store(ProgramRequest $request)
     {
         $program = Program::create($request->validated());
         return new ProgramResource($program);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Program  $program
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Program $program)
     {
         return new ProgramResource($program);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Program  $program
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(ProgramRequest $request, Program $program)
     {
         $program->update($request->validated());
         return new ProgramResource($program);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Program  $program
-     * @return \Illuminate\Http\Response
-     */
+    public function updateState(ProgramRequest $request, Program $program)
+    {
+        $program->state = $request->state;
+        $program->save();
+
+        if( $request->state == 'desactivado') {
+            return response()->json([ 'message' => 'DESACTIVADO']);
+        } else {
+            return response()->json([ 'message' => 'ACTIVADO']);
+        }
+    }
+
     public function destroy(Program $program)
     {
         $program->delete();

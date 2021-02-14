@@ -48,6 +48,8 @@ Route::apiResource('institutions', InstitutionController::class)->middleware('au
 /**
  *  Programs
  */
+Route::get('all/active/programs', [ProgramController::class, 'getAllActive'])->middleware('auth:sanctum');
+Route::put('updateState/programs/{program}', [ProgramController::class, 'updateState'])->middleware('auth:sanctum');
 Route::apiResource('programs', ProgramController::class)->middleware('auth:sanctum');
 
 
