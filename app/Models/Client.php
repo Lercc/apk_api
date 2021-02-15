@@ -19,6 +19,10 @@ class Client extends Model
         'commentary'
     ];
 
+    public function getFullinfoAttribute() {
+        return "{$this->name} {$this->surnames} - {$this->dni}";
+    }
+
     public function clientPrograms()
     {
         return $this->hasMany(ClientProgram::class)->orderBy('id','desc');

@@ -37,6 +37,7 @@ class VoucherController extends Controller
         $image = $request->file('image')->store('image/voucher','public');
         $voucher->image = $image;
         $voucher->save();
+
         return new VoucherResource($voucher); 
     }
 
