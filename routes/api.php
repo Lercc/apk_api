@@ -23,11 +23,13 @@ use App\Http\Controllers\Voucher\VoucherController;
  * login
  */
 Route::post('login', [LoginController::class, 'login']);
+Route::post('login/client', [LoginController::class, 'clientLogin']);
 
 /**
  * logout
  */
 Route::post('logout/{user}', [LogoutController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('logout/client/{client}', [LogoutController::class, 'clientLogout'])->middleware('auth:sanctum');
 
 /**
  * User

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientLoginRequest;
 use App\Http\Requests\LoginRequest;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -28,11 +30,31 @@ class LoginController extends Controller
             ]
           ]);
     }
-
     // login false
     return response()->json([
         'message' => 'Credenciales incorrectas'
     ], 401);
   }
 
+  public function clientLogin(ClientLoginRequest $request)
+  {
+    $client = Client::where('email','=',$request->email)->get();
+    $app = User::find('1');
+
+    if(count($client) !== 0 && $request->dni === $client[0]->dni) {
+      
+      return response()->json([
+          'attributes' => [
+            'id'          =>  $client[0]->id, 
+            'role'        =>  'clientAplication', 
+            'token'       => $app->createToken('clientAplication')->plainTextToken,
+          ]
+        ]);
+    } else {
+      return response()->json([
+          'message' => 'Credenciales incorrectas'
+      ], 401);
+    }
+  }
+  
 }
