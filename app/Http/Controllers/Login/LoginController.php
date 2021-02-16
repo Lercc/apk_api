@@ -14,15 +14,25 @@ class LoginController extends Controller
   {
     if (Auth::attempt($request->only('email', 'password'))) {
 
+      if ($request->user()->roles[0]->name == 'aplication') {
+          $request->user()->tokens()->delete();
+      }
+
         return response()->json([
-            'token' => $request->user()->createToken($request->token_name)->plainTextToken,
-            'message' => 'Success',
-        ]);
+            'attributes' => [
+              'id'    =>  $request->user()->id, 
+              'name'    =>  $request->user()->name, 
+              'email'    =>  $request->user()->email, 
+              'role'    =>  $request->user()->roles[0]->name, 
+              'token'   => $request->user()->createToken($request->user()->roles[0]->name)->plainTextToken,
+            ]
+          ]);
     }
 
     // login false
     return response()->json([
-        'message' => 'Unauthorized'
+        'message' => 'Credenciales incorrectas'
     ], 401);
   }
+
 }

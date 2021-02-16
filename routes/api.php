@@ -11,6 +11,8 @@ use App\Http\Controllers\ClientProgram\ClientProgramVoucheController;
 use App\Http\Controllers\Institution\InstitutionController;
 use App\Http\Controllers\Lead\LeadController;
 use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Logout\LogoutController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Voucher\VoucherController;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -23,6 +25,20 @@ use App\Http\Controllers\Voucher\VoucherController;
 Route::post('login', [LoginController::class, 'login']);
 
 /**
+ * logout
+ */
+Route::post('logout/{user}', [LogoutController::class, 'logout'])->middleware('auth:sanctum');
+
+/**
+ * User
+ */
+Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
+
+/**
+ * 
+ */
+
+/**
  *  Clients
  */
 Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum');
@@ -33,6 +49,7 @@ Route::apiResource('clients.clientPrograms', ClientClientProgramController::clas
  */
 Route::get('all/careers', [CareerController::class, 'getAll'])->middleware('auth:sanctum');
 Route::get('all/active/careers', [CareerController::class, 'getAllActive'])->middleware('auth:sanctum');
+Route::get('all/active/careers/without', [CareerController::class, 'getAllActive']);
 Route::put('updateState/careers/{career}', [CareerController::class, 'updateState'])->middleware('auth:sanctum');
 Route::apiResource('careers', CareerController::class)->middleware('auth:sanctum');
 
@@ -42,6 +59,7 @@ Route::apiResource('careers', CareerController::class)->middleware('auth:sanctum
  */
 Route::get('all/institutions', [InstitutionController::class, 'getAll'])->middleware('auth:sanctum');
 Route::get('all/active/institutions', [InstitutionController::class, 'getAllActive'])->middleware('auth:sanctum');
+Route::get('all/active/institutions/without', [InstitutionController::class, 'getAllActive']);
 Route::put('updateState/institutions/{institution}', [InstitutionController::class, 'updateState'])->middleware('auth:sanctum');
 Route::apiResource('institutions', InstitutionController::class)->middleware('auth:sanctum');
 
@@ -49,6 +67,7 @@ Route::apiResource('institutions', InstitutionController::class)->middleware('au
  *  Programs
  */
 Route::get('all/active/programs', [ProgramController::class, 'getAllActive'])->middleware('auth:sanctum');
+Route::get('all/active/programs/without', [ProgramController::class, 'getAllActive']);
 Route::put('updateState/programs/{program}', [ProgramController::class, 'updateState'])->middleware('auth:sanctum');
 Route::apiResource('programs', ProgramController::class)->middleware('auth:sanctum');
 
@@ -72,6 +91,7 @@ Route::apiResource('vouchers', VoucherController::class)->middleware('auth:sanct
 
 // CREATE LEADS
 Route::post('leads/store', [LeadController::class, 'store'])->middleware('auth:sanctum');
+Route::post('leads/store/without', [LeadController::class, 'store']);
 
 
 // SHOW ONE LEAD

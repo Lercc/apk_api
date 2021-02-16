@@ -11,7 +11,9 @@ class VoucherObserver
  
     public function created(Voucher $voucher)
     {
-        Mail::to(['lercc.en@gmail.com', 'rokekanto@gmail.com'])->queue(new VoucherRegistradoMailable($voucher));
+        if (!\App::runningInConsole()) {
+            Mail::to(['lercc.en@gmail.com', 'rokekanto@gmail.com'])->queue(new VoucherRegistradoMailable($voucher));
+        }
     }
 
  
