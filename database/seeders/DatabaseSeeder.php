@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         Client::factory(50)->create();
         Lead::factory(100)->create();
         ClientProgram::factory(100)->create();
-        Voucher::factory(10)->create();
+        Voucher::factory(100)->create();
 
         
 

@@ -97,7 +97,7 @@
                             text-align: center;
                             font-weight:bold;
                             ">
-                            <img src="{{asset("storage/$content->image")}}" width="100%"
+                            <img src="{{asset("storage/{$content->image}")}}" width="100%"
                             {{-- <img src="https://picsum.photos/480/516" width="100%" --}}
                                 style="display: block;
                                 border-radius: 10px;

@@ -32,12 +32,12 @@ class VoucherController extends Controller
      */
     public function store(VoucherRequest $request)
     {
-        $voucher = Voucher::create($request->validated());
-        
         $image = $request->file('image')->store('image/voucher','public');
-        $voucher->image = $image;
-        $voucher->save();
-
+        
+        // $voucher = Voucher::create($request->validated());
+        // El observer se ejecuta al momento que ::CREATE termina;
+        $voucher = Voucher::create($request->except('image')+['image' => $image]);
+        
         return new VoucherResource($voucher); 
     }
 

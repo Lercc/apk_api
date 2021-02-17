@@ -27,8 +27,8 @@ class UserSeeder extends Seeder
         ])->syncRoles('admin');
         
         User::create([
-            'name' => 'luis roque',
-            'email' => 'luis@admin.com',
+            'name' => 'luis roque ccanto',
+            'email' => 'lercc.en@gmail.com.com',
             'password' => bcrypt('LUIS2021EMPLOYEE')
         ])->syncRoles('employee');
     }
