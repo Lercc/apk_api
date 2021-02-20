@@ -8,6 +8,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Program\ProgramController;
 use App\Http\Controllers\ClientProgram\ClientProgramController;
 use App\Http\Controllers\ClientProgram\ClientProgramVoucheController;
+use App\Http\Controllers\Export\ExportController;
 use App\Http\Controllers\Institution\InstitutionController;
 use App\Http\Controllers\Lead\LeadController;
 use App\Http\Controllers\Login\LoginController;
@@ -18,6 +19,14 @@ use App\Http\Controllers\Voucher\VoucherController;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+/**
+ * Download
+ */
+Route::get('download/aplicantes/{fecha}', [ExportController::class, 'exportAplicantes']);
+Route::get('download/leads/{fecha}/{tabla}', [ExportController::class, 'exportLeads']);
+Route::get('download/leads/{fecha}/aceptados/{pipeline}', [ExportController::class, 'exportLeadsCalificados']);
+
 
 /**
  * login
