@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 class LogoutController extends Controller
 {
  
-    public function logout(User $user)
+    public function logout(Request $request , User $user)
     {
-        $user->tokens()->delete();
+        //$user->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
         return response()->json([ 'message' => 'Sesión terminada' ], 203);
     }
 
