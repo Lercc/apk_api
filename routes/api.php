@@ -107,6 +107,7 @@ Route::post('leads/store/without', [LeadController::class, 'store']);
 
 // SHOW ONE LEAD
 Route::get('leads/show/{lead}', [LeadController::class, 'show'])->middleware('auth:sanctum');
+Route::get('leads/dni/{dni}', [LeadController::class, 'showLead'])->middleware('auth:sanctum');
 
 
 // INDEX LEADS

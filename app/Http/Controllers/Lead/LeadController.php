@@ -14,6 +14,15 @@ class LeadController extends Controller
     public function show (Lead $lead) {
         return new LeadResource($lead);
     }
+   
+    public function showLead ($dni) {
+        $lead = Lead::where('dni', '=', $dni)->get();
+        if(count($lead) == 0 ){
+            return response()->json(['message'=>'Ningún registro encontrado'], 203);
+        }else {
+            return new LeadResource($lead[0]);
+        }
+    }
 
     /**
      * Store no protegido por el middleware auth
