@@ -25,7 +25,7 @@ use App\Http\Controllers\Voucher\VoucherController;
  */
 Route::get('download/aplicantes/{fecha}', [ExportController::class, 'exportAplicantes']);
 Route::get('download/leads/{fecha}/{tabla}', [ExportController::class, 'exportLeads']);
-Route::get('download/leads/{fecha}/aceptados/{pipeline}', [ExportController::class, 'exportLeadsCalificados']);
+Route::get('download/leads/{fecha}/aceptados/{pipeline}', [ExportController::class, 'exportLeadsAceptados']);
 
 
 /**

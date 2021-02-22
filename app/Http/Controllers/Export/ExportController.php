@@ -32,10 +32,11 @@ class ExportController extends Controller implements ShouldAutoSize
         ])
         ->orderBy('created_at','asc')
         ->get();
-        return Excel::download(new LeadsCalificadosExport($leads), 'lead.xlsx');
+        return Excel::download(new LeadsCalificadosExport($leads), 'leads.xlsx');
     }
+    
    
-    public function exportLeadsCalificados($fecha, $pipeline) 
+    public function exportLeadsAceptados($fecha, $pipeline) 
     {
         if($pipeline == 'todos'){
             $leads = Lead::where([
@@ -53,6 +54,6 @@ class ExportController extends Controller implements ShouldAutoSize
             ->orderBy('created_at','asc')
             ->get();
         }
-        return Excel::download(new LeadsAceptadosExport($leads), 'lead.xlsx');
+        return Excel::download(new LeadsAceptadosExport($leads), 'leadAceptados.xlsx');
     }
 }

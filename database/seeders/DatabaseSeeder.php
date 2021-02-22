@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-        Client::factory(50)->create();
-        Lead::factory(100)->create();
-        ClientProgram::factory(100)->create();
-        Voucher::factory(100)->create();
+        // Client::factory(50)->create();
+        // Lead::factory(100)->create();
+        // ClientProgram::factory(100)->create();
+        // Voucher::factory(100)->create();
 
         
 
