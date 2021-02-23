@@ -37,7 +37,6 @@ class VoucherController extends Controller
         // $voucher = Voucher::create($request->validated());
         // El observer se ejecuta al momento que ::CREATE termina;
         $voucher = Voucher::create($request->except('image')+['image' => $image]);
-        
         return new VoucherResource($voucher); 
     }
 
@@ -64,6 +63,7 @@ class VoucherController extends Controller
         $basic_rules = [
             'client_program_id'   => ['required','numeric'],
             'name'                => ['required','string', 'max:80'],
+            'amount'              => ['required','numeric'],
             'state'               => ['required','string', 'max:10'],
             'description'         => ['nullable','string', 'max:200']
         ];

@@ -17,6 +17,7 @@ class Voucher extends Model
         'client_program_id',
         'name',
         'code',
+        'amount',
         'image',
         'state',
         'description',
