@@ -5,13 +5,22 @@ use App\Models\Voucher;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Mail\VoucherRegistradoMailable;
-
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+/**
+ *  EXPORT APLICANTES VIEW TEST
+ */
+// Route::get('/aplicantes-export-view', function () {
+//     $aplicantes = Client::orderBy('id','asc')->get();
+//     return view('exports.aplicantes', compact('aplicantes'));
+// });
+
 
 /**
  * mail 
@@ -56,10 +65,15 @@ use Illuminate\Support\Facades\Artisan;
 //     return 'Configuration cache cleared! -Configuration cached successfully!!!';
 // });
 
-// Route::get('/clear', function () {
-//     Storage::deleteDirectory('public');
-//     Storage::makeDirectory('public');
 
-//     Artisan::call('route:clear');
-//     Artisan::call('storage:link', [] );
+/*
+ * MIGRATE PARA CREAR EL NUEVO CAMPO AMOUNT EN VOUCHER
+*/
+// Route::get('/add-amount-to-vouchers', function () {
+//     Artisan::call('make:migration', ['name' => 'add_amount_to_vouchers']);
+//     return 'migrate add_amount_to_vouchers creado!';
+// });
+// Route::get('/migrate', function () {
+//     Artisan::call('migrate');
+//     return 'migrate success!';
 // });

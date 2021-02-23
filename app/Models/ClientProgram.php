@@ -32,6 +32,6 @@ class ClientProgram extends Model
 
     public function vouchers()
     {
-        return $this->hasMany(Voucher::class)->orderBy('id','desc');
+        return $this->hasMany(Voucher::class)->orderBy('id','asc');
     }
 }

@@ -5,7 +5,9 @@ namespace App\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class AplicantesExport implements FromView
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
+class AplicantesExport implements FromView, ShouldAutoSize
 {
     public $aplicantes;
 
