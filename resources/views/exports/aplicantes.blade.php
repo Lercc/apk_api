@@ -25,31 +25,33 @@
             <td>{{ $aplicante->commentary }}</td>
             
             @foreach($aplicante->clientPrograms as $clientProgram)
-            <td style="width:20px; text-align:center; @if($clientProgram->program->name == 'work and travel') background: #968ece
-                    @elseif($clientProgram->program->name == 'internship') background: #7fbfd8
-                    @elseif($clientProgram->program->name == 'trainee') background: #7fbfd8
-                    @elseif($clientProgram->program->name == 'au pair') background: #f1d390
-                    @endif"
-            >
-                {{ $clientProgram->program->name }} - {{ $clientProgram->season }}
-            </td>
+                @if ( $clientProgram->season == $season)
+                    <td style="width:20px; text-align:center; @if($clientProgram->program->name == 'work and travel') background: #968ece
+                            @elseif($clientProgram->program->name == 'internship') background: #7fbfd8
+                            @elseif($clientProgram->program->name == 'trainee') background: #7fbfd8
+                            @elseif($clientProgram->program->name == 'au pair') background: #f1d390
+                            @endif"
+                    >
+                        {{ $clientProgram->program->name }} - {{ $clientProgram->season }}
+                    </td>
 
-                @foreach( $clientProgram->vouchers as $index => $voucher)
-                <td style="width:20px; text-align:center;  @if($index%2  == 0) background: #D9D9D9
-                        @else background: #B1B4B6
-                        @endif"
-                >{{ $voucher->name }}</td>  
-               
-                <td style="width:20px; text-align:center; @if($index%2  == 0) background: #D9D9D9
-                        @else background: #B1B4B6
-                        @endif"
-                >{{ $voucher->code }}</td>  
-               
-                <td style="width:20px; text-align:center; @if($index%2  == 0) background: #D9D9D9
-                        @else background: #B1B4B6
-                        @endif"
-                >{{ $voucher->amount }}</td>  
-                @endforeach
+                    @foreach( $clientProgram->vouchers as $index => $voucher)
+                    <td style="width:20px; text-align:center;  @if($index%2  == 0) background: #D9D9D9
+                            @else background: #B1B4B6
+                            @endif"
+                    >{{ $voucher->name }}</td>  
+                
+                    <td style="width:20px; text-align:center; @if($index%2  == 0) background: #D9D9D9
+                            @else background: #B1B4B6
+                            @endif"
+                    >{{ $voucher->code }}</td>  
+                
+                    <td style="width:20px; text-align:center; @if($index%2  == 0) background: #D9D9D9
+                            @else background: #B1B4B6
+                            @endif"
+                    >{{ $voucher->amount }}</td>  
+                    @endforeach
+                @endif
             @endforeach
         </tr>
     @endforeach

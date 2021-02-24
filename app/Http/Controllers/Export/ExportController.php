@@ -18,9 +18,13 @@ class ExportController extends Controller implements ShouldAutoSize
 {
     public function exportAplicantes($fecha) 
     {
-        // return $fecha;
-        $aplicantes = Client::where('created_at' ,'>=', $fecha)->orderBy('created_at','asc')->get();
-        return Excel::download(new AplicantesExport($aplicantes), 'aplicantes.xlsx');
+        // $aplicantes = Client::where('created_at' ,'>=', $fecha)->orderBy('created_at','asc')->get();
+        $aplicantes = Client:: select('clients.*')
+                               ->join('client_programs', 'client_programs.client_id', '=', 'clients.id')
+                               ->where('client_programs.season', '=', $fecha)
+                               ->orderBy('clients.id', 'asc')
+                               ->get(); 
+        return Excel::download(new AplicantesExport($aplicantes, $fecha), 'aplicantes.xlsx');
     }
   
     public function exportLeads($fecha, $tabla) 
