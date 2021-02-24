@@ -23,9 +23,9 @@ use App\Http\Controllers\Voucher\VoucherController;
 /**
  * Download
  */
-Route::get('download/aplicantes/{fecha}', [ExportController::class, 'exportAplicantes']);
-Route::get('download/leads/{fecha}/{tabla}', [ExportController::class, 'exportLeads']);
-Route::get('download/leads/{fecha}/aceptados/{pipeline}', [ExportController::class, 'exportLeadsAceptados']);
+Route::get('download/aplicantes/{fecha}', [ExportController::class, 'exportAplicantes'])->middleware('auth:sanctum');
+Route::get('download/leads/{fecha}/{tabla}', [ExportController::class, 'exportLeads'])->middleware('auth:sanctum');
+Route::get('download/leads/{fecha}/aceptados/{pipeline}', [ExportController::class, 'exportLeadsAceptados'])->middleware('auth:sanctum');
 
 
 /**
