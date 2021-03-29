@@ -15,6 +15,7 @@ use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Logout\LogoutController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Voucher\VoucherController;
+use App\Http\Controllers\Assistant\AssistantController;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -142,3 +143,9 @@ Route::delete('leads/{lead}', [LeadController::class, 'destroy'])->name('leads.d
  */
 
 
+
+ /**
+ *  ASSISTANT 
+ */
+Route::post('assistant/store', [AssistantController::class, 'store']);
+Route::apiResource('assistants', AssistantController::class)->only(['index', 'show','destroy','update'])->middleware('auth:sanctum');

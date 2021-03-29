@@ -77,3 +77,25 @@ use Illuminate\Support\Facades\Artisan;
 //     Artisan::call('migrate');
 //     return 'migrate success!';
 // });
+
+
+/*
+ * ASSISTANT
+*/
+Route::get('/create-Assistant-model', function () {
+    Artisan::call('make:model', ['name' => 'Assistant', '-m' => true]);
+    Artisan::call('make:controller', ['name' => 'Assistant/AssistantController', '--api' => true]);
+    
+    Artisan::call('make:request', ['name' => 'AssistantRequest']);
+    Artisan::call('make:resource', ['name' => 'AssistantResource']);
+    Artisan::call('make:resource', ['name' => 'AssistantCollection']);
+
+    
+
+    return 'modelo assistant creado!, request creado, resource creado, resource collection creado';
+});
+
+Route::get('/migrate-assistants', function () {
+    Artisan::call('migrate');
+    return 'migrate success!';
+});

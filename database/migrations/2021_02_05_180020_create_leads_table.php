@@ -19,7 +19,7 @@ class CreateLeadsTable extends Migration
             $table->string('dni',8)->unique();
             $table->string('name',80);
             $table->string('surnames',80);
-            $table->string('mobile',9)->nullable()->nullable();
+            $table->string('mobile',9)->nullable();
             $table->string('email')->unique();
             $table->bigInteger('career_id')->unsigned();
             $table->string('semester',9);
