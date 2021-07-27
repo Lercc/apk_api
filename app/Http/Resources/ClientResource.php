@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Voucher;
 
 class ClientResource extends JsonResource
 {
@@ -15,6 +16,22 @@ class ClientResource extends JsonResource
     public function toArray($request)
     {
         // return parent::toArray($request);
+        $vouchers = Voucher::select('vouchers.state')
+                               ->join('client_programs', 'client_programs.id', '=', 'vouchers.client_program_id')
+                               ->where('client_programs.client_id', '=', $this->id)
+                               ->get();
+                               
+        $voucherState = 'vacio';
+
+        foreach ($vouchers as $key => $voucher) {
+            if ( $vouchers[$key]['state'] == 'pendiente') {
+                $voucherState = 'pendiente';
+                break;
+            } else {
+                $voucherState = 'verificado';
+            }
+        }
+
         return [
             'type'          => 'client',
             'id'            => (string) $this->id,
@@ -27,6 +44,7 @@ class ClientResource extends JsonResource
                 'email'       => $this->email,
                 'profile'     => $this->profile,
                 'commentary'  => $this->commentary,
+                'status'      => $voucherState,
             ],
             'relationships' => [],
             'links' => [

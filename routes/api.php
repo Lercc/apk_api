@@ -53,6 +53,7 @@ Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
 /**
  *  Clients
  */
+Route::get('filterClients/{value}', [ClientController::class, 'getFilterClient'])->middleware('auth:sanctum');
 Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum');
 Route::apiResource('clients.clientPrograms', ClientClientProgramController::class)->only('index')->middleware('auth:sanctum');
 

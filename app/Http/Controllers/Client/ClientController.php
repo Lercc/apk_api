@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function getFilterClient($value) {
+        $clients = Client::where('dni','like',"%$value%")
+                        ->orWhere('name','like',"%$value%")
+                        ->orWhere('surnames','like',"%$value%")
+                        ->orderBy('id', 'desc')->paginate(10);
+        return new ClientCollection($clients);
+    }
+
     /**
      * Display a listing of the resource.
      *
