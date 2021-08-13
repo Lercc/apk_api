@@ -33,6 +33,6 @@ class VoucherRegistradoMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.voucherRegistered');
+        return $this->view('mail.voucherRegisteredNew');
     }
 }

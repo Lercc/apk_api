@@ -27,13 +27,13 @@ use Illuminate\Support\Facades\Artisan;
  */
 
 // Route::get('/', function () {
-//         $content = Voucher::find(50);
-//         return view('mail.voucherRegistered', compact('content'));
+//         $content = Voucher::find(263);
+//         return view('mail.voucherRegisteredNew', compact('content'));
 //     });
     
 // Route::get('/enviar', function () {
-//         $voucher = Voucher::find(51);
-//         Mail::to(['lercc.en@gmail.com', 'rokekanto@gmail.com'])->queue(new VoucherRegistradoMailable($voucher));
+//         $voucher = Voucher::find(169);
+//         Mail::to('lercc.en@gmail.com')->queue(new VoucherRegistradoMailable($voucher));
 //         return 'enviado';
 // });
         

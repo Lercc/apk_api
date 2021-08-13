@@ -77,7 +77,7 @@ class VoucherController extends Controller
                 $rule = $rule +['image' => ['mimes:jpeg,jpg,jpe,png,webp']];
             }
         } else {
-            $rule = ['code' => ['required','string']];
+            $rule = ['code' => ['nullable','string']];
             if($request->file('image') == null ) {
                 $rule = $rule + ['image'=> ['nullable']];
             } else {

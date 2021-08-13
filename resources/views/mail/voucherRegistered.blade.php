@@ -57,7 +57,7 @@
                                 padding: 2px 30px;
                                 color: #544979;
                                 border-radius: 8px;
-                                background: rgba(0, 0, 0, 0.05);"">VOUCHER : {{$content->code}}</span>
+                                background: rgba(0, 0, 0, 0.05);"">VOUCHER : {{$content->code ? $content->code : 'yape'}}</span>
                         </span>
                         <span style="display: block;
                             margin: 10px 0px;
@@ -104,8 +104,8 @@
                                 box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.35);
                             ">
                             
-                             <a href="{{config('app.frontend')}}/#/gestion-clientes/detalles-cliente/{{$content->clientProgram->client->id}}" 
-                            {{-- <a href="http://localhost:8080/#/gestion-clientes/detalles-cliente/{{$content->client_program_id}}"  --}}
+                             <a href="{{config('app.frontend')}}/gestion-aplicantes/detalles-aplicante/{{$content->clientProgram->client->id}}" 
+                            {{-- <a href="http://localhost:8080/gestion-aplicantes/detalles-aplicante/{{$content->client_program_id}}"  --}}
                                 target="_blank"
                                 style="display: inline-block;
                                 width:unset;
