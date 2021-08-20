@@ -5,6 +5,7 @@ use App\Models\Voucher;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Mail\VoucherRegistradoMailable;
+use App\Mail\EqualCodeVouchersMailable;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
@@ -36,8 +37,32 @@ use Illuminate\Support\Facades\Artisan;
 //         Mail::to('lercc.en@gmail.com')->queue(new VoucherRegistradoMailable($voucher));
 //         return 'enviado';
 // });
+
+// Route::get('/testEqualvouchers', function () {
+//     // $str = '0135905';
+//     // $str = '135';
+//     $currentVoucher = Voucher::find('115');
+//     $str =  rtrim(ltrim($currentVoucher->code, '0'), '0');
+
+//     $vouchers = Voucher::where('code', 'like', "%$str%")->get();
+
+//     // $str = '0000541000035400000';
+//     // return rtrim(ltrim($str, '0'), '0');
+
+//     // return gettype($vouchers);
+//     // return $vouchers;
+    
+//     if (sizeof($vouchers) > 1 ) {
+//         // 
+//         return view('mail.equalCodeVouchers', compact(['vouchers','currentVoucher']));
         
-        
+//         // Mail::to('lercc.en@gmail.com')->queue(new EqualCodeVouchersMailable($vouchers, $currentVoucher));
+//         // return 'enviado'; 
+//     }
+//     return sizeof($vouchers);
+//     // return $vouchers;
+// });
+
 /**
  * users_type_employee - laravel permissions
 */
@@ -82,20 +107,20 @@ use Illuminate\Support\Facades\Artisan;
 /*
  * ASSISTANT
 */
-Route::get('/create-Assistant-model', function () {
-    Artisan::call('make:model', ['name' => 'Assistant', '-m' => true]);
-    Artisan::call('make:controller', ['name' => 'Assistant/AssistantController', '--api' => true]);
+// Route::get('/create-Assistant-model', function () {
+//     Artisan::call('make:model', ['name' => 'Assistant', '-m' => true]);
+//     Artisan::call('make:controller', ['name' => 'Assistant/AssistantController', '--api' => true]);
     
-    Artisan::call('make:request', ['name' => 'AssistantRequest']);
-    Artisan::call('make:resource', ['name' => 'AssistantResource']);
-    Artisan::call('make:resource', ['name' => 'AssistantCollection']);
+//     Artisan::call('make:request', ['name' => 'AssistantRequest']);
+//     Artisan::call('make:resource', ['name' => 'AssistantResource']);
+//     Artisan::call('make:resource', ['name' => 'AssistantCollection']);
 
     
 
-    return 'modelo assistant creado!, request creado, resource creado, resource collection creado';
-});
+//     return 'modelo assistant creado!, request creado, resource creado, resource collection creado';
+// });
 
-Route::get('/migrate-assistants', function () {
-    Artisan::call('migrate');
-    return 'migrate success!';
-});
+// Route::get('/migrate-assistants', function () {
+//     Artisan::call('migrate');
+//     return 'migrate success!';
+// });

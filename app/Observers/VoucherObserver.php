@@ -3,13 +3,14 @@
 namespace App\Observers;
 
 use App\Mail\VoucherRegistradoMailable;
+use App\Mail\EqualCodeVouchersMailable;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Mail;
 
 class VoucherObserver
 {
- 
+
     public function created(Voucher $voucher)
     {
         if (!\App::runningInConsole()) {
@@ -21,6 +22,13 @@ class VoucherObserver
             }
 
             Mail::to($emails)->queue(new VoucherRegistradoMailable($voucher));
+
+            $codeTrim = ltrim(rtrim($voucher->code, '0'), '0');
+            $equalCodesVouchers = Voucher::where('code', 'like', "%$codeTrim%")->get();
+
+            if (sizeof($equalCodesVouchers) > 1) {
+                Mail::to($emails)->queue(new EqualCodeVouchersMailable($equalCodesVouchers, $voucher));
+            }
         }
     }
 
