@@ -17,6 +17,7 @@ class ClientProgram extends Model
         'program_id',
         'season',
         'state',
+        'cost',
         'description'
     ];
 

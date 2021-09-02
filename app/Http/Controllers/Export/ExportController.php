@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Client;
 
+use App\Exports\AplicantesResumeCostExport;
 use App\Exports\AplicantesExport;
 use App\Exports\LeadsCalificadosExport;
 use App\Exports\LeadsAceptadosExport;
@@ -16,6 +17,16 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class ExportController extends Controller implements ShouldAutoSize
 {
+    public function exportAplicantesResumeCost($fecha) 
+    {
+        $aplicantes = Client:: select('clients.*')
+                               ->join('client_programs', 'client_programs.client_id', '=', 'clients.id')
+                               ->where('client_programs.season', '=', $fecha)
+                               ->orderBy('clients.id', 'asc')
+                               ->get(); 
+        return Excel::download(new AplicantesResumeCostExport($aplicantes, $fecha), 'aplicantes.xlsx');
+    }
+
     public function exportAplicantes($fecha) 
     {
         // $aplicantes = Client::where('created_at' ,'>=', $fecha)->orderBy('created_at','asc')->get();

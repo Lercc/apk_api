@@ -52,11 +52,9 @@ class ClientProgramController extends Controller
      * @param  \App\Models\ClientProgram  $clientProgram
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientProgramRequest $request, ClientProgram $clientProgram)
+    public function update(Request $request, ClientProgram $clientProgram)
     {
-    
-        $clientProgram->update($request->validated());
-
+        $clientProgram->update(['cost'=>$request->cost]);
         return new ClientProgramResource($clientProgram);
     }
 

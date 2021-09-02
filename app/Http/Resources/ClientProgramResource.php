@@ -24,6 +24,7 @@ class ClientProgramResource extends JsonResource
                 'program_id'      => $this->program_id,
                 'program_name'    => $this->program->name,
                 'season'          => $this->season,
+                'cost'            => $this->cost,
                 'state'           => $this->state,
                 'description'     => $this->description,
             ],

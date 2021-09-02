@@ -28,6 +28,7 @@ class ClientProgramRequest extends FormRequest
             'program_id'        => ['required', 'numeric'],
             'season'            => ['required', 'string'],
             'state'             => ['nullable', 'string', 'max:9'],
+            'cost'              => ['required'],
             'description'       => ['nullable', 'string', 'max:200'],
         ];
     }

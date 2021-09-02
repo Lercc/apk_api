@@ -24,6 +24,7 @@ use App\Http\Controllers\Assistant\AssistantController;
 /**
  * Download
  */
+Route::get('download/aplicantes-resume-cost/{fecha}', [ExportController::class, 'exportAplicantesResumeCost'])->middleware('auth:sanctum');
 Route::get('download/aplicantes/{fecha}', [ExportController::class, 'exportAplicantes'])->middleware('auth:sanctum');
 Route::get('download/leads/{fecha}/{tabla}', [ExportController::class, 'exportLeads'])->middleware('auth:sanctum');
 Route::get('download/leads/{fecha}/aceptados/{pipeline}', [ExportController::class, 'exportLeadsAceptados'])->middleware('auth:sanctum');

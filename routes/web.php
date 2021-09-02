@@ -22,6 +22,18 @@ use Illuminate\Support\Facades\Artisan;
 //     return view('exports.aplicantes', compact('aplicantes'));
 // });
 
+/**
+ *  EXPORT APLICANTES RESUME COST VIEW TEST
+ */
+// Route::get('/aplicantes-resume-cost-export-view', function () {
+//     $season = '2021';
+//     $aplicantes = Client:: select('clients.*')
+//                                ->join('client_programs', 'client_programs.client_id', '=', 'clients.id')
+//                                ->where('client_programs.season', '=', $season)
+//                                ->orderBy('clients.id', 'asc')
+//                                ->get(); 
+//     return view('exports.aplicantesResumeCost', compact('aplicantes', 'season'));
+// });
 
 /**
  * mail 
@@ -89,7 +101,10 @@ use Illuminate\Support\Facades\Artisan;
 //     Artisan::call('cache:clear');
 //     return 'Configuration cache cleared! -Configuration cached successfully!!!';
 // });
-
+// Route::get('/make-export-AplicantesResumeCostExport', function () {
+//     Artisan::call('make:export', ['name' => 'AplicantesResumeCostExport']);
+//     return 'make-export-AplicantesResumeCostExport successfully!!!';
+// });
 
 /*
  * MIGRATE PARA CREAR EL NUEVO CAMPO AMOUNT EN VOUCHER
@@ -98,11 +113,22 @@ use Illuminate\Support\Facades\Artisan;
 //     Artisan::call('make:migration', ['name' => 'add_amount_to_vouchers']);
 //     return 'migrate add_amount_to_vouchers creado!';
 // });
+
+/*
+ * MIGRATE PARA CREAR EL NUEVO CAMPO COST EN CLIENT-PROGRAMS
+*/
+// Route::get('/add_cost_to_client_programs', function () {
+//     Artisan::call('make:migration', ['name' => 'add_cost_to_client_programs']);
+//     return 'migrate add_cost_to_client_programs creado!';
+// });
+
+/*
+*  CORRER MIGRACIONES
+*/
 // Route::get('/migrate', function () {
 //     Artisan::call('migrate');
 //     return 'migrate success!';
 // });
-
 
 /*
  * ASSISTANT
