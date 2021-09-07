@@ -95,11 +95,11 @@ use Illuminate\Support\Facades\Artisan;
 //     Artisan::call('storage:link');
 //     return 'Enlace simbolico creado!!';
 // });
-// Route::get('/config-cache', function () {
-//     Artisan::call('config:cache');
+// Route::get('/cache-clear', function () {
 //     Artisan::call('config:clear');
+//     Artisan::call('route:clear');
 //     Artisan::call('cache:clear');
-//     return 'Configuration cache cleared! -Configuration cached successfully!!!';
+//     return 'Configuration cache cleared!!!';
 // });
 // Route::get('/make-export-AplicantesResumeCostExport', function () {
 //     Artisan::call('make:export', ['name' => 'AplicantesResumeCostExport']);
