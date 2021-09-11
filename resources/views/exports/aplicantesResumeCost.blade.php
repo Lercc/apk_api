@@ -40,7 +40,7 @@
                     @endphp
 
                     @foreach( $clientProgram->vouchers as $index => $voucher)
-                        @if($voucher->state == 'verificado' && $voucher->name != 'Entrevista de inglés')
+                        @if($voucher->state == 'verificado' && ($voucher->name != 'Entrevista de inglés' && $voucher->name != 'SEVIS'))
                             @php
                             $abonado += $voucher->amount
                             @endphp
